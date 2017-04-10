@@ -1,0 +1,40 @@
+body{
+    margin:0 auto;
+}
+.parte1{
+    float: left;
+    margin: 5px;
+    border: 1px solid #000; 
+    overflow: hidden;
+    width: 25%;
+    height: 300px;
+}
+.parte2{
+    float: left;
+    margin: 5px;
+    border: 1px solid #000; 
+     overflow: hidden;
+     width: 25%;
+    height: 300px;
+}
+#carte{
+   
+    float: left;
+    margin: 5px;
+    border: 1px solid #000; 
+    width: 45%;
+    height: 100%;
+     overflow: hidden; 
+}
+#map{
+   
+    float: left;
+    margin: 5px;
+    border: 1px solid #000; 
+    width: 45%;
+    height: 600px;
+     overflow: hidden; 
+}
+.clear{
+	clear: both;
+}
