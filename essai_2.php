@@ -32,17 +32,19 @@ require_once('essai2.php');
 
              
 
-                      /* ***Traitement pour la PopUp*** */
+                      
             var resultat = <?= json_encode($resultat); ?>; //Transformer l'objet php en fichier json 
 
-              //création du marqueur
+             
                
               for(var i=0; i < resultat.length; i++){//boucle pour afficher tous les marquers
                 if(i == 150)break;
 
                 var res = resultat[i].geo_coordinates.split(",");
-                var info = '<h1>'+resultat[i].Titre+'</h1>'+'<p>'+resultat[i].Realisateur+'</p>';
+               
 
+                /* ***Traitement pour la PopUp*** */
+                var info = '<h1>'+resultat[i].Titre+'</h1>'+'<p>'+resultat[i].Realisateur+'</p>';
                 var infowindow = new google.maps.InfoWindow({
                   //marker: marker[i],
                   placement: 'top',
@@ -51,41 +53,43 @@ require_once('essai2.php');
                   maxHeight: 200
                 });
 
-
-                var marker = new google.maps.Marker({ //Création d'objet pour les markeur 
-                  position: {lat: parseFloat(res[0]), lng: parseFloat(res[1])},//Parser les valeur
+                 //création du marqueur
+                var marker = new google.maps.Marker({ //Création d'objet pour les markeurs 
+                  position: {lat: parseFloat(res[0]), lng: parseFloat(res[1])},//Parser les valeurs
                   animation: google.maps.Animation.DROP,
                   Mike: infowindow,
                   //draggable: true,
                   map: map,
                   visible: true
                 });
-                markers[i] = marker;
+
+                markers[i] = marker;//Stocker les marquers dans un array(tableau)
+
+                //Création de l'evenement sur le marqueur
                 google.maps.event.addListener(marker,'click' , function() {
-                  if(Mikeclose != 0)
+                  if(Mikeclose != 0)//S'il y a une popup ouvert tu le fermer 
                     Mikeclose.close();
-                  this.Mike.open(map, this);
+                  this.Mike.open(map, this);//Sinon tu ouvre la popup
                   Mikeclose = this.Mike;
-                });
+                });              
               }
                
               
                 
-             
-            
-
-
-                // Add a marker clusterer to manage the markers.
-             
-            }
+             // Add a marker clusterer to manage the markers.
+              var markerCluster = new MarkerClusterer(map, markers,{imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
             /*
             *Création des clusters 
             *Ils prennent 3 paramètres la map(voir la ligne 26), markers(l'ensembles des marquers il s'agit     d'un tableau(voir la ligne 36)) et l'emplacemnt de l'image là il s'agit d'un lien des photos de    google. 
             */
 
+
+                
+             
+            }
+
             
               
-              var markerCluster = new MarkerClusterer(map, markers,{imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
             
               
     </script>
